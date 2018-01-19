@@ -9,7 +9,7 @@
 #define MYAPPLICATION_H
 
 #include <Magnum/DefaultFramebuffer.h>
-#include <Magnum/Platform/GlutApplication.h>
+#include <Magnum/Platform/GlfwApplication.h>
 
 using namespace Magnum;
 

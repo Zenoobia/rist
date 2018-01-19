@@ -5,7 +5,7 @@ using namespace Magnum;
 MyApplication::MyApplication(const Arguments &args)
         : Platform::Application{ args, Configuration{}
                                  .setTitle("")
-                                 .setFlags(Configuration::Flag::Debug) }
+                                 .setWindowFlags(Configuration::WindowFlag::Resizable) }
 {
 
 }

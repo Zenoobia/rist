@@ -24,7 +24,7 @@ endif()
 
 
 find_package(Magnum REQUIRED 
-	GlutApplication
+	GlfwApplication
 	DebugTools
 	Primitives
 	SceneGraph
