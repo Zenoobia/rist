@@ -30,20 +30,25 @@ find_package(Magnum REQUIRED
 	SceneGraph
 	Shapes
     Shaders
+	MeshTools
 )
 
 find_package(Corrade REQUIRED Utility)
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
-set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/configure.h.cmake
                ${CMAKE_CURRENT_BINARY_DIR}/configure.h)
 
-#corrade_add_resource(_RESOURCES resources.conf)
+corrade_add_resource(RESOURCES resources.conf)
 
 set(EX_NAME MyApplication)
-add_executable(${EX_NAME} MyApplication.cpp)
+add_executable(${EX_NAME}
+	${RESOURCES}
+	MyApplication.cpp
+	MyApplication.h
+	Types.hpp
+	)
 
 target_link_libraries(${EX_NAME}
     Magnum::Application
@@ -53,6 +58,7 @@ target_link_libraries(${EX_NAME}
     Magnum::SceneGraph
     Magnum::Shaders
     Magnum::Shapes
+	Magnum::DebugTools
     Corrade::Utility
     )
 
