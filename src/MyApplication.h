@@ -62,6 +62,8 @@
 #include <Magnum/Texture.h>
 #include <Magnum/TextureFormat.h>
 
+#include <Meta.h>
+
 #include "configure.h"
 #include "Types.hpp"
 
@@ -133,6 +135,37 @@ private:
     Timeline _timeline;
 };
 
+class CDrawable: public SceneGraph::Drawable3D {
+    public:
+    explicit CDrawable(SceneGraph::AbstractObject3D& parent, SceneGraph::DrawableGroup3D* drawables);
+
+    void setMesh(Mesh& mesh, Float radius);
+
+    void setShader(Shaders::Phong& shader);
+
+    Float radius() const;
+
+    void draw(const Matrix4& transformationMatrix, SceneGraph::Camera3D& camera) override;
+
+public:
+    Float value;
+    private:
+        Mesh* _mesh{};
+        Shaders::Phong *_shader{};
+        Float _radius;
+};
+
+namespace meta {
+
+template<>
+inline auto registerMembers<CDrawable>()
+{
+    return members(
+        member("value", &CDrawable::value)
+                   );
+}
+
+}
 
 
 #endif

@@ -48,8 +48,11 @@ add_executable(${EX_NAME}
 	MyApplication.cpp
 	MyApplication.h
 	Types.hpp
+	example/StringCast.cpp
 	)
 
+link_directories("p:/sys/lib")
+find_package(Lua REQUIRED)
 target_link_libraries(${EX_NAME}
     Magnum::Application
     Magnum::Magnum
@@ -60,12 +63,17 @@ target_link_libraries(${EX_NAME}
     Magnum::Shapes
 	Magnum::DebugTools
     Corrade::Utility
+	${LUA_LIBRARIES}
     )
 
 target_include_directories(${EX_NAME} PRIVATE
 	"P:/sys/include"
 	"/usr/include"
 	"/usr/local/include"
+    "p:/external/MetaStuff/include"
+	"p:/external/json/src"
+	"../build/include"
+	${LUA_INCLUDE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR})
 
 #install(TARGETS ${EX_NAME} DESTINATION ${MAGNUM_BINARY_INSTALL_DIR})

@@ -1,25 +1,35 @@
 #include "MyApplication.h"
 
+#include <ctime> // To seed random number generator with current time.
+
+//#include "json.hpp"
+
+#include <json.hpp>
+#include "example/JsonCast.h"
+
+#include "example/Person.h"
+
+using json = nlohmann::json;
+
+#include <sol.hpp>
+
 using namespace Magnum;
 
-class CDrawable: public SceneGraph::Drawable3D {
-    public:
-    explicit CDrawable(SceneGraph::AbstractObject3D& parent, SceneGraph::DrawableGroup3D* drawables)
+CDrawable::CDrawable(SceneGraph::AbstractObject3D& parent, SceneGraph::DrawableGroup3D* drawables)
             : Magnum::SceneGraph::Drawable3D{parent, drawables} {};
 
-        /** @brief Mesh to use for this drawable and its bounding sphere radius */
-        void setMesh(Mesh& mesh, Float radius) {
+void CDrawable::setMesh(Mesh& mesh, Float radius) {
             _mesh = &mesh;
             _radius = radius;
         }
 
-        void setShader(Shaders::Phong& shader) {
+void CDrawable::setShader(Shaders::Phong& shader) {
             _shader = &shader;
         }
 
-        Float radius() const { return _radius; }
+Float CDrawable::radius() const { return _radius; }
 
-    void draw(const Matrix4& transformationMatrix, SceneGraph::Camera3D& camera) override {
+void CDrawable::draw(const Matrix4& transformationMatrix, SceneGraph::Camera3D& camera) {
         _shader->setDiffuseColor(Color3(1.0f, 0.0f, 0.0f))
         .setTransformationMatrix(transformationMatrix)
         .setNormalMatrix(transformationMatrix.rotationScaling())
@@ -29,12 +39,6 @@ class CDrawable: public SceneGraph::Drawable3D {
     //.setLightPosition({3.0f, -3.0f, 3.0f})
         _mesh->draw(*_shader);
     }
-
-    private:
-        Mesh* _mesh{};
-        Shaders::Phong *_shader{};
-        Float _radius;
-};
 
 MyApplication::MyApplication(const Arguments &args)
         : Platform::Application{ args, Configuration{}
@@ -57,8 +61,9 @@ _resource{"shadow-data"}
     addModel(Primitives::Capsule3D::solid(6, 1, 9, 1.0f));
 
     Object3D* ground = createSceneObject(_models[0], false, true);
-    ground->setTransformation(Matrix4::scaling({100,1,100}));
+     ground->setTransformation(Matrix4::scaling({100,1,100}));
 
+    std::srand(std::time(nullptr)); // use current time as seed for random generator
     for(std::size_t i = 0; i != 200; ++i) {
         Model& model = _models[std::rand()%_models.size()];
         Object3D* object = createSceneObject(model, true, true);
@@ -67,7 +72,6 @@ _resource{"shadow-data"}
                         std::rand()*5.0f/RAND_MAX,
                         std::rand()*100.0f/RAND_MAX - 50.0f}));
     }
-
 
     _mainCamera.setProjectionMatrix(Matrix4::perspectiveProjection(35.0_degf,
                                                                    Vector2{defaultFramebuffer.viewport().size()}.aspectRatio(),
@@ -88,7 +92,20 @@ _resource{"shadow-data"}
     //setMinimalLoopPeriod(16);
     _timeline.start();
 
+    static_assert(meta::isRegistered<Person>(), "Person class is not registered!");
+	static_assert(meta::getMemberCount<Person>() == 4, "Person does not have 4 members registered?");
+
     redraw();
+
+
+    sol::state lua;
+
+    UnsignedInt x = 0;
+    lua.set_function("beep", [&x]{++x;});
+    lua.script("beep()");
+    assert(x == 1);
+    lua.script("beep()");
+    assert(x == 2);
 
 }
 
@@ -99,6 +116,10 @@ MyApplication::~MyApplication()
 Object3D* MyApplication::createSceneObject(Model& model, bool makeCaster, bool makeReceiver) {
     auto* object = new Object3D(&_scene);
     auto drawable = new CDrawable(*object, &_drawables);
+
+    drawable->value = 13.0f;
+    auto value = meta::getMemberValue<Float>(*drawable, "value");
+    assert(drawable->value == value);
 
     drawable->setShader(_shader);
     drawable->setMesh(model.mesh, model.radius);
