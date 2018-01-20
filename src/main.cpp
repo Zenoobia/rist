@@ -57,15 +57,33 @@ int main() {
     std::cout << static_cast<double>(function(3,7)) << std::endl;
 
     auto entity = entityManager.create_entity();
+#if 0
+    Person person(20, "John");
+    bool valid;
+    std::tie(person, valid) = entity.add_component<Person>(15, "John");
 
-    //auto person = entity.add_component<Person>(30, "John");
-    auto person = Person(30, "John");
+    person.name = "John";
+    person.age  = 25;
+    //auto person = Person(30, "John");
     static_assert(metas::isRegistered<Person>(), "Person class is not registered!");
 	static_assert(metas::getMemberCount<Person>() == 4, "Person does not have 4 members registered?");
+/*
+    metas::doForAllMembers<Person>([&obj, &object](auto& member)
+                                   std::cout << member << std::endl;
+                                   );
+*/
+    j = person;std::cout << std::setw(4) << j << std::endl;
+#endif
+    Person *person;
+    bool valid;
+    /*
+    std::tie(person, valid) = entity.add_component<Person>(15, "John");
 
-    //j = person;
+    person->name = "John";
+    person->age = 19;
 
-    //std::cout << std::setw(4) << j << std::endl;
+    assert(person.age == entity.get_component<Person>().age);
+    */
 
     return 0;
 }
