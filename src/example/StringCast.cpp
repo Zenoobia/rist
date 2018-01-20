@@ -1,4 +1,4 @@
-#include "stringcast.h"
+#include "StringCast.h"
 
 std::string castToString(const bool& value)
 {
@@ -49,3 +49,4 @@ std::string fromString(const std::string& valueStr)
 {
     return valueStr;
 }
+

@@ -107,6 +107,7 @@ _resource{"shadow-data"}
     lua.script("beep()");
     assert(x == 2);
 
+
 }
 
 MyApplication::~MyApplication()

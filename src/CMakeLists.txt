@@ -21,7 +21,7 @@ if(POLICY CMP0054)
     cmake_policy(SET CMP0054 NEW)
 endif()
 
-
+#find_package(Sol2 REQUIRED)
 
 find_package(Magnum REQUIRED 
 	GlfwApplication
@@ -47,9 +47,9 @@ add_executable(${EX_NAME}
 	${RESOURCES}
 	MyApplication.cpp
 	MyApplication.h
-	Types.hpp
-	example/StringCast.cpp
-	)
+	Types.hpp)
+
+#example/StringCast.cpp
 
 link_directories("p:/sys/lib")
 find_package(Lua REQUIRED)
