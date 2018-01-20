@@ -45,23 +45,24 @@ corrade_add_resource(RESOURCES resources.conf)
 set(EX_NAME MyApplication)
 add_executable(${EX_NAME}
 	${RESOURCES}
-	MyApplication.cpp
-	MyApplication.h
-	Types.hpp)
-
-#example/StringCast.cpp
+    main.cpp
+    example/StringCast.cpp
+    )
+#	MyApplication.cpp
+#	MyApplication.h
+#	Types.hpp
 
 link_directories("p:/sys/lib")
 find_package(Lua REQUIRED)
 target_link_libraries(${EX_NAME}
-    Magnum::Application
-    Magnum::Magnum
-    Magnum::MeshTools
-    Magnum::Primitives
-    Magnum::SceneGraph
-    Magnum::Shaders
-    Magnum::Shapes
-	Magnum::DebugTools
+#    Magnum::Application
+#    Magnum::Magnum
+#    Magnum::MeshTools
+#    Magnum::Primitives
+#    Magnum::SceneGraph
+#    Magnum::Shaders
+#    Magnum::Shapes
+#	Magnum::DebugTools
     Corrade::Utility
 	${LUA_LIBRARIES}
     )

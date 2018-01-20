@@ -17,17 +17,17 @@ void to_json(json& j, const T& obj);
 template <typename T>
 void from_json(const json& j, T& obj);
 
-namespace meta
+namespace metas
 {
 
 /////////////////// SERIALIZATION
 
 template <typename Class,
-    typename = std::enable_if_t <meta::isRegistered<Class>()>>
+    typename = std::enable_if_t <metas::isRegistered<Class>()>>
 json serialize(const Class& obj);
 
 template <typename Class,
-    typename = std::enable_if_t <!meta::isRegistered<Class>()>,
+    typename = std::enable_if_t <!metas::isRegistered<Class>()>,
     typename = void>
 json serialize(const Class& obj);
 
@@ -49,11 +49,11 @@ json serialize_basic(const std::unordered_map<K, V>& obj);
 //Class deserialize(const json& obj);
 
 template <typename Class,
-    typename = std::enable_if_t<meta::isRegistered<Class>()>>
+    typename = std::enable_if_t<metas::isRegistered<Class>()>>
 void deserialize(Class& obj, const json& object);
 
 template <typename Class,
-    typename = std::enable_if_t<!meta::isRegistered<Class>()>,
+    typename = std::enable_if_t<!metas::isRegistered<Class>()>,
     typename = void>
 void deserialize(Class& obj, const json& object);
 

@@ -13,6 +13,8 @@ struct Person {
     // template <>
     // auto meta::registerMembers<Person>();
 
+    Person(const int age, const std::string name) : age(age), name(name)
+    {};
     void setAge(int a)
     {
         //std::cout << "Age is set by calling setter!\n";
@@ -48,7 +50,7 @@ struct Person {
 
 #include <Meta.h>
 
-namespace meta {
+namespace metas {
 
 template <>
 inline auto registerMembers<Person>()

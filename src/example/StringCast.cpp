@@ -30,6 +30,7 @@ bool fromString(const std::string& valueStr)
     } else if (valueStr == "false") {
         return false;
     }
+    return false;
 }
 
 template <>

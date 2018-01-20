@@ -9,7 +9,7 @@ struct MovieInfo {
 
 #include <Meta.h>
 
-namespace meta {
+namespace metas {
 
 template <>
 inline auto registerMembers<MovieInfo>()

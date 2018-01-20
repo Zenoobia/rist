@@ -3,16 +3,16 @@
 template <typename T>
 void to_json(json& j, const T& obj)
 {
-    j = meta::serialize(obj);
+    j = metas::serialize(obj);
 }
 
 template <typename T>
 void from_json(const json& j, T& obj)
 {
-    meta::deserialize(obj, j);
+    metas::deserialize(obj, j);
 }
 
-namespace meta
+namespace metas
 {
 
 /////////////////// SERIALIZATION
@@ -22,7 +22,7 @@ template <typename Class,
 json serialize(const Class& obj)
 {
     json value;
-    meta::doForAllMembers<Class>(
+    metas::doForAllMembers<Class>(
         [&obj, &value](auto& member)
         {
             auto& valueName = value[member.getName()];
@@ -88,12 +88,12 @@ template <typename Class,
 void deserialize(Class& obj, const json& object)
 {
     if (object.is_object()) {
-        meta::doForAllMembers<Class>(
+        metas::doForAllMembers<Class>(
             [&obj, &object](auto& member)
             {
                 auto& objName = object[member.getName()];
                 if (!objName.is_null()) {
-                    using MemberT = meta::get_member_type<decltype(member)>;
+                    using MemberT = metas::get_member_type<decltype(member)>;
                     if (member.hasSetter()) {
                         member.set(obj, objName.template get<MemberT>());
                     } else if (member.canGetRef()) {
