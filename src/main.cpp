@@ -73,9 +73,10 @@ int main() {
                                    );
 */
     j = person;std::cout << std::setw(4) << j << std::endl;
-#endif
+
     Person *person;
     bool valid;
+#endif
     /*
     std::tie(person, valid) = entity.add_component<Person>(15, "John");
 
