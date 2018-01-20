@@ -13,6 +13,7 @@ struct Person {
     // template <>
     // auto meta::registerMembers<Person>();
 
+    Person() {};
     Person(const int age, const std::string name) : age(age), name(name)
     {};
     void setAge(int a)
@@ -42,8 +43,12 @@ struct Person {
         return name;
     }
 
+    friend auto metas::registerMembers<Person>(); // Allowing private access
+private:
+
     int age;
     std::string name;
+public:
     float salary;
     std::unordered_map<std::string, std::vector<MovieInfo>> favouriteMovies;
 };

@@ -5,3 +5,5 @@ sumNumbers = function(a,b)
     return a + b
 end
 
+
+game.addEnemy(17, "James")
