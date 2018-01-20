@@ -70,8 +70,8 @@ target_include_directories(${EX_NAME} PRIVATE
 	"P:/sys/include"
 	"/usr/include"
 	"/usr/local/include"
-    "p:/external/MetaStuff/include"
-	"p:/external/json/src"
+	"../../external/json/src"
+	"../../external/MetaStuff/include"
 	"../build/include"
 	${LUA_INCLUDE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR})
