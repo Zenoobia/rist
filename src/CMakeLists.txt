@@ -72,11 +72,11 @@ target_include_directories(${EX_NAME} PRIVATE
 	"/usr/include"
 	"/usr/local/include"
 	"../../external/json/src"
-	"../../external/MetaStuff/include"
 	"../build/include"
 	${LUA_INCLUDE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR})
 
+#"../../external/MetaStuff/include"
 #install(TARGETS ${EX_NAME} DESTINATION ${MAGNUM_BINARY_INSTALL_DIR})
 #install(FILES README.md DESTINATION ${MAGNUM_DATA_INSTALL_DIR}/examples RENAME README-shadows.md)
 
