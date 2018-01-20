@@ -8,7 +8,7 @@ find_package(PythonInterp 3 REQUIRED)
 set(SOL2_TAG v2.5.6)
 set(SOL2_HPP "${CMAKE_BINARY_DIR}/include/sol.hpp")
 set(VENDOR_PATH external)
-
+set(VENDOR_PREFIX external)
 # Download and "install" sol2
 ExternalProject_add(
     sol2
@@ -25,8 +25,7 @@ ExternalProject_add(
     BUILD_COMMAND
             ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include
         COMMAND
-            #cmd.exe "dir" : p:/src/sol2 = ../../src/sol2
-			${PYTHON_EXECUTABLE} ../../rist/build/external/src/sol2/single.py -o "${SOL2_HPP}"
+			${PYTHON_EXECUTABLE} ./single.py -o "${SOL2_HPP}"
 
     # No install or test command for the library
     INSTALL_COMMAND ""
