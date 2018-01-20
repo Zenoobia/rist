@@ -73,6 +73,7 @@ target_include_directories(${EX_NAME} PRIVATE
 	"/usr/local/include"
 	"../../external/json/src"
 	"../build/include"
+    "../include/metas"
 	${LUA_INCLUDE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR})
 
