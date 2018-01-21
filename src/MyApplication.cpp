@@ -92,8 +92,8 @@ _resource{"shadow-data"}
     //setMinimalLoopPeriod(16);
     _timeline.start();
 
-    static_assert(meta::isRegistered<Person>(), "Person class is not registered!");
-	static_assert(meta::getMemberCount<Person>() == 4, "Person does not have 4 members registered?");
+    static_assert(metas::isRegistered<Person>(), "Person class is not registered!");
+	static_assert(metas::getMemberCount<Person>() == 4, "Person does not have 4 members registered?");
 
     redraw();
 
@@ -119,7 +119,7 @@ Object3D* MyApplication::createSceneObject(Model& model, bool makeCaster, bool m
     auto drawable = new CDrawable(*object, &_drawables);
 
     drawable->value = 13.0f;
-    auto value = meta::getMemberValue<Float>(*drawable, "value");
+    auto value = metas::getMemberValue<Float>(*drawable, "value");
     assert(drawable->value == value);
 
     drawable->setShader(_shader);

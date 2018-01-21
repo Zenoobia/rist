@@ -155,7 +155,7 @@ public:
         Float _radius;
 };
 
-namespace meta {
+namespace metas {
 
 template<>
 inline auto registerMembers<CDrawable>()

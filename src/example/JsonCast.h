@@ -31,7 +31,9 @@ template <typename Class,
     typename = void>
 json serialize(const Class& obj);
 
-template <typename Class>
+
+
+template <typename Class> 
 json serialize_basic(const Class& obj);
 
 // specialization for std::vector

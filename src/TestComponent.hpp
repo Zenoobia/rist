@@ -13,6 +13,7 @@
 class TestComponent
 {
 public:
+    TestComponent() {};
     TestComponent(const int value, const std::string name) : value(value), name(name) {};
 
     int getValue() const { return value; };  // NOTE: const very important with MetaStuff !!

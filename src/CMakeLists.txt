@@ -22,6 +22,8 @@ if(POLICY CMP0054)
 endif()
 
 #find_package(Sol2 REQUIRED)
+link_directories("p:/sys/lib")
+find_package(Lua REQUIRED)
 
 find_package(Magnum REQUIRED 
 	GlfwApplication
@@ -33,7 +35,7 @@ find_package(Magnum REQUIRED
 	MeshTools
 )
 
-find_package(Corrade REQUIRED Utility)
+find_package(Corrade REQUIRED Utility TestSuite)
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
 
@@ -42,27 +44,42 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/configure.h.cmake
 
 corrade_add_resource(RESOURCES resources.conf)
 
+enable_testing()
+corrade_add_test(MyTest main.cpp example/StringCast.cpp
+	LIBRARIES 
+		Corrade::Utility
+		${LUA_LIBRARIES}
+	)
+
+target_include_directories(MyTest PRIVATE
+	"P:/sys/include"
+	"/usr/include"
+	"/usr/local/include"
+	"../../external/json/src"
+	"../build/include"
+    "../include/metas"
+	${LUA_INCLUDE_DIR}
+	${CMAKE_CURRENT_BINARY_DIR})
+
+	
 set(EX_NAME MyApplication)
 add_executable(${EX_NAME}
 	${RESOURCES}
-    main.cpp
     example/StringCast.cpp
-    )
-#	MyApplication.cpp
-#	MyApplication.h
-#	Types.hpp
+    MyApplication.cpp
+	MyApplication.h
+	Types.hpp
+)
 
-link_directories("p:/sys/lib")
-find_package(Lua REQUIRED)
 target_link_libraries(${EX_NAME}
-#    Magnum::Application
-#    Magnum::Magnum
-#    Magnum::MeshTools
-#    Magnum::Primitives
-#    Magnum::SceneGraph
-#    Magnum::Shaders
-#    Magnum::Shapes
-#	Magnum::DebugTools
+    Magnum::Application
+    Magnum::Magnum
+    Magnum::MeshTools
+    Magnum::Primitives
+    Magnum::SceneGraph
+    Magnum::Shaders
+    Magnum::Shapes
+	Magnum::DebugTools
     Corrade::Utility
 	${LUA_LIBRARIES}
     )
