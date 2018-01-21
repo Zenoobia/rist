@@ -18,6 +18,7 @@ using namespace Corrade::Utility;
 
 #include "ScriptManager.cpp"
 
+#include "configure.h"
 #include "example/JsonCast.h"
 #include "example/Person.h"
 #include "TestComponent.hpp"
@@ -103,7 +104,7 @@ namespace Corrade {
 /* NOTE: Works with Corrade ResourceManager,
    but defeats the purpose of runtime scripting */
         
-            CORRADE_VERIFY(scriptManager.executeScript("../../src/script.lua"));
+            CORRADE_VERIFY(scriptManager.executeScript(DATA_DIR"/script.lua"));
         
             Function function = scriptManager.getFunction("sumNumbers");
 
@@ -179,7 +180,7 @@ namespace Corrade {
             Debug{} << j.dump(4);
             
             Directory::writeString("tc.json", j.dump(4));
-            j = Directory::readString("../../src/enemy.json");
+            j = Directory::readString(DATA_DIR"enemy.json");
 
             //assert(j["value"] == 24);
             //j = Directory::readString("tc.json");

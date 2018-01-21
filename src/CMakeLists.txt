@@ -7,9 +7,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(MSVC)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
-else()
-	set(MAGNUM_BINARY_INSTALL_DIR "${MAGNUM_BINARY_INSTALL_DIR}/${CMAKE_BUILD_TYPE}/")
 endif(MSVC)
+if(UNIX)
+	#set(MAGNUM_BINARY_INSTALL_DIR "${MAGNUM_BINARY_INSTALL_DIR}/${CMAKE_BUILD_TYPE}/")
+#message(${MAGNUM_BINARY_INSTALL_DIR})
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/Debug")
+
+endif(UNIX)
+
 # CMake policies: don't treat imported targets with :: as files
 if(POLICY CMP0028)
     cmake_policy(SET CMP0028 NEW)
@@ -44,7 +49,7 @@ set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/configure.h.cmake
                ${CMAKE_CURRENT_BINARY_DIR}/configure.h)
 
-corrade_add_resource(RESOURCES resources.conf)
+corrade_add_resource(RESOURCES data/resources.conf)
 
 enable_testing()
 corrade_add_test(MyTest main.cpp example/StringCast.cpp
@@ -72,6 +77,7 @@ add_executable(${EX_NAME}
 	MyApplication.h
 	Types.hpp
 )
+
 
 target_link_libraries(${EX_NAME}
     Magnum::Application
@@ -103,4 +109,4 @@ target_include_directories(${EX_NAME} PRIVATE
 add_custom_target(
 	COMMAND ${EX_NAME}
 	COMMAND ${EX_NAME}
-    COMMAND ${MAGNUM_BINARY_INSTALL_DIR})
+    COMMAND "${MAGNUM_BINARY_INSTALL_DIR}/Debug")

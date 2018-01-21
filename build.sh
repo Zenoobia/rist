@@ -15,6 +15,15 @@ if [ "$1" == "run" ]; then
 	exit
 fi
 
+if [ "$1" == "test" ]; then
+	pushd bin
+	./MyTest
+	popd
+	exit
+fi
+
+
+
 mkdir -p build
 pushd build &&\
 cmake .. &&\
