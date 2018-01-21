@@ -7,6 +7,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(MSVC)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
+	set(BIN_DIR "${CMAKE_BUILD_TYPE}SS/")
+else()
+	set(BIN_DIR "${CMAKE_BUILD_TYPE}/")
 endif(MSVC)
 # CMake policies: don't treat imported targets with :: as files
 if(POLICY CMP0028)
@@ -95,10 +98,10 @@ target_include_directories(${EX_NAME} PRIVATE
 	${CMAKE_CURRENT_BINARY_DIR})
 
 #"../../external/MetaStuff/include"
-#install(TARGETS ${EX_NAME} DESTINATION ${MAGNUM_BINARY_INSTALL_DIR})
+install(TARGETS ${EX_NAME} DESTINATION ${MAGNUM_BINARY_INSTALL_DIR})
 #install(FILES README.md DESTINATION ${MAGNUM_DATA_INSTALL_DIR}/examples RENAME README-shadows.md)
 
 add_custom_target(
 	COMMAND ${EX_NAME}
 	COMMAND ${EX_NAME}
-    COMMAND ${MAGNUM_BINARY_INSTALL_DIR})
+    COMMAND ${BIN_DIR}${MAGNUM_BINARY_INSTALL_DIR})

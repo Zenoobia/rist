@@ -6,8 +6,9 @@
    ======================================================================== */
 #pragma once
 
+#define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING
 #pragma warning(push)
-#pragma warning(disable : 4996) // Prevents c++17 Deprecation warnings
+#pragma warning(disable : 4996 4127) // Prevents c++17 Deprecation warnings //4127: conditional expression is constant
 #include <sol.hpp>
 #pragma warning(pop)
 
