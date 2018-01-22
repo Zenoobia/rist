@@ -36,4 +36,4 @@
 #endif
 
 
-#define DATA_DIR "${PROJECT_SOURCE_DIR}/data"
+#define DATA_DIR "${PROJECT_SOURCE_DIR}/data/"

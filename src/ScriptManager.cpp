@@ -24,7 +24,7 @@ public:
     bool executeScript(const std::string &scriptPath ){
 
         if(Directory::fileExists(scriptPath)) {
-            _lua.script_file(scriptPath);
+	  _lua.script_file(scriptPath); // TODO: Debug lua script
             return true;
         }
         Debug{} << "File not found: " << scriptPath;

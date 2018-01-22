@@ -5,5 +5,8 @@ sumNumbers = function(a,b)
 	   return a + b
 end
 
+local entityManager = EntityManager.new()
+
+--entityManager.create_entity();
 
 --game.addEnemy(17, "James")

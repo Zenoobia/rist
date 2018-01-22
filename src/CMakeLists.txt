@@ -9,10 +9,6 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
 endif(MSVC)
 if(UNIX)
-	#set(MAGNUM_BINARY_INSTALL_DIR "${MAGNUM_BINARY_INSTALL_DIR}/${CMAKE_BUILD_TYPE}/")
-#message(${MAGNUM_BINARY_INSTALL_DIR})
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/Debug")
-
 endif(UNIX)
 
 # CMake policies: don't treat imported targets with :: as files
@@ -52,7 +48,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/configure.h.cmake
 corrade_add_resource(RESOURCES data/resources.conf)
 
 enable_testing()
-corrade_add_test(MyTest main.cpp example/StringCast.cpp
+corrade_add_test(MyTest main.cpp example/StringCast.cpp EntityManager.cpp
 	LIBRARIES 
 		Corrade::Utility
 		${LUA_LIBRARIES}
