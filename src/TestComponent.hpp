@@ -9,6 +9,7 @@
 #define TESTCOMPONENT_H
 
 #include <string>
+#include <Meta.h>
 
 class TestComponent
 {
@@ -26,7 +27,6 @@ public:
     std::string name;
 };
 
-#include <Meta.h>
 
 namespace metas {
     template<>

@@ -61,6 +61,7 @@ target_include_directories(MyTest PRIVATE
 	"../../external/json/src"
 	"../build/include"
     "../include/metas"
+    "p:/sys/include/sol2"
 	${LUA_INCLUDE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR})
 
@@ -95,6 +96,7 @@ target_include_directories(${EX_NAME} PRIVATE
 	"../../external/json/src"
 	"../build/include"
     "../include/metas"
+    "p:/sys/include/sol2"
 	${LUA_INCLUDE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR})
 
