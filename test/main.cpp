@@ -130,7 +130,7 @@ addComponents(ent,500); local ent2 = manager:create_entity();");
 
     auto sum = 0;
     manager.for_each<int>(
-			  [&](Entity ent, int i) {
+			  [&sum](Entity ent, int i) {
 			    sum++;
 			  });
    
